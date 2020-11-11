@@ -1,0 +1,326 @@
+State 7 conflicts: 3 shift/reduce
+State 20 conflicts: 3 shift/reduce
+State 22 conflicts: 3 shift/reduce
+State 23 conflicts: 3 shift/reduce
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: Line Program
+    2        | Line
+
+    3 Line: Expr0 '.'
+
+    4 Expr0: Expr0 Expr1
+    5      | '~' Expr0
+    6      | '(' Expr0 ')'
+    7      | Const
+
+    8 Expr1: '|' '|' Expr0
+    9      | Expr2
+
+   10 Expr2: '^' Expr0
+   11      | Expr3
+
+   12 Expr3: '&' '&' Expr0
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'&' (38) 12
+'(' (40) 6
+')' (41) 6
+'.' (46) 3
+'^' (94) 10
+'|' (124) 8
+'~' (126) 5
+error (256)
+Const (258) 7
+
+
+Nonterminals, with rules where they appear
+
+$accept (11)
+    on left: 0
+Program (12)
+    on left: 1 2, on right: 0 1
+Line (13)
+    on left: 3, on right: 1 2
+Expr0 (14)
+    on left: 4 5 6 7, on right: 3 4 5 6 8 10 12
+Expr1 (15)
+    on left: 8 9, on right: 4
+Expr2 (16)
+    on left: 10 11, on right: 9
+Expr3 (17)
+    on left: 12, on right: 11
+
+
+State 0
+
+    0 $accept: . Program $end
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Program  go to state 4
+    Line     go to state 5
+    Expr0    go to state 6
+
+
+State 1
+
+    7 Expr0: Const .
+
+    $default  reduce using rule 7 (Expr0)
+
+
+State 2
+
+    5 Expr0: '~' . Expr0
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Expr0  go to state 7
+
+
+State 3
+
+    6 Expr0: '(' . Expr0 ')'
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Expr0  go to state 8
+
+
+State 4
+
+    0 $accept: Program . $end
+
+    $end  shift, and go to state 9
+
+
+State 5
+
+    1 Program: Line . Program
+    2        | Line .
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    $default  reduce using rule 2 (Program)
+
+    Program  go to state 10
+    Line     go to state 5
+    Expr0    go to state 6
+
+
+State 6
+
+    3 Line: Expr0 . '.'
+    4 Expr0: Expr0 . Expr1
+
+    '.'  shift, and go to state 11
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17
+
+
+State 7
+
+    4 Expr0: Expr0 . Expr1
+    5      | '~' Expr0 .
+
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    '|'       [reduce using rule 5 (Expr0)]
+    '^'       [reduce using rule 5 (Expr0)]
+    '&'       [reduce using rule 5 (Expr0)]
+    $default  reduce using rule 5 (Expr0)
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17
+
+
+State 8
+
+    4 Expr0: Expr0 . Expr1
+    6      | '(' Expr0 . ')'
+
+    ')'  shift, and go to state 18
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17
+
+
+State 9
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+State 10
+
+    1 Program: Line Program .
+
+    $default  reduce using rule 1 (Program)
+
+
+State 11
+
+    3 Line: Expr0 '.' .
+
+    $default  reduce using rule 3 (Line)
+
+
+State 12
+
+    8 Expr1: '|' . '|' Expr0
+
+    '|'  shift, and go to state 19
+
+
+State 13
+
+   10 Expr2: '^' . Expr0
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Expr0  go to state 20
+
+
+State 14
+
+   12 Expr3: '&' . '&' Expr0
+
+    '&'  shift, and go to state 21
+
+
+State 15
+
+    4 Expr0: Expr0 Expr1 .
+
+    $default  reduce using rule 4 (Expr0)
+
+
+State 16
+
+    9 Expr1: Expr2 .
+
+    $default  reduce using rule 9 (Expr1)
+
+
+State 17
+
+   11 Expr2: Expr3 .
+
+    $default  reduce using rule 11 (Expr2)
+
+
+State 18
+
+    6 Expr0: '(' Expr0 ')' .
+
+    $default  reduce using rule 6 (Expr0)
+
+
+State 19
+
+    8 Expr1: '|' '|' . Expr0
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Expr0  go to state 22
+
+
+State 20
+
+    4 Expr0: Expr0 . Expr1
+   10 Expr2: '^' Expr0 .
+
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    '|'       [reduce using rule 10 (Expr2)]
+    '^'       [reduce using rule 10 (Expr2)]
+    '&'       [reduce using rule 10 (Expr2)]
+    $default  reduce using rule 10 (Expr2)
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17
+
+
+State 21
+
+   12 Expr3: '&' '&' . Expr0
+
+    Const  shift, and go to state 1
+    '~'    shift, and go to state 2
+    '('    shift, and go to state 3
+
+    Expr0  go to state 23
+
+
+State 22
+
+    4 Expr0: Expr0 . Expr1
+    8 Expr1: '|' '|' Expr0 .
+
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    '|'       [reduce using rule 8 (Expr1)]
+    '^'       [reduce using rule 8 (Expr1)]
+    '&'       [reduce using rule 8 (Expr1)]
+    $default  reduce using rule 8 (Expr1)
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17
+
+
+State 23
+
+    4 Expr0: Expr0 . Expr1
+   12 Expr3: '&' '&' Expr0 .
+
+    '|'  shift, and go to state 12
+    '^'  shift, and go to state 13
+    '&'  shift, and go to state 14
+
+    '|'       [reduce using rule 12 (Expr3)]
+    '^'       [reduce using rule 12 (Expr3)]
+    '&'       [reduce using rule 12 (Expr3)]
+    $default  reduce using rule 12 (Expr3)
+
+    Expr1  go to state 15
+    Expr2  go to state 16
+    Expr3  go to state 17

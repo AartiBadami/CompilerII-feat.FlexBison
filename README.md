@@ -20,6 +20,13 @@ Expr3 ::= && Expr0
 Const ::= T | F  
   
   
+--Examples--
+Sample input:
+F || (~(T ^ T) && ~F).
+Sample output:
+T
+  
+  
 --How to Run Tests--
 1. cd /path/to/CompilerII/directory
 2. execute the command: "./gates" or "./gates < test-cases.txt"
